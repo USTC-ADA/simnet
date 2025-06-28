@@ -8,6 +8,12 @@ all:
 	g++ -O3 -std=c++11 8_buildQSim.cpp -o buildQSim
 	g++ -O3 -std=c++11 -DAC_TRACE 8_buildQSim.cpp -o buildQSimAC
 
+buildROB: 0_buildROB.cpp
+	g++ -O3 -std=c++11 0_buildROB.cpp -o buildROB
+
+buildSim: 8_buildSim.cpp
+	g++ -O3 -std=c++11 8_buildSim.cpp -o buildSim
+
 1121:
 	g++ -O3 -std=c++11 0_build1121.cpp -o build1121
 	g++ -O3 -std=c++11 8_build1121Sim.cpp -o build1121Sim

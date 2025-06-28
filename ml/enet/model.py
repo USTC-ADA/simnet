@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """model.py - Model and module class for EfficientNet.
    They are built to mirror those in the official TensorFlow implementation.
 """

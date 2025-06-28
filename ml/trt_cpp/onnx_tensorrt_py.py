@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import onnx
 import tensorrt as trt
 import onnx_tensorrt.backend as backend

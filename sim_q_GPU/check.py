@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import numpy as np
 truth=np.fromfile("libsim.bin",dtype=np.float32)
 custom=np.fromfile("libcustom.bin",dtype=np.float32)

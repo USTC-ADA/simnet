@@ -30,12 +30,13 @@ def make_feature_from_context(vals): # Vals is all instructions concatenated.
 parser = argparse.ArgumentParser(description="Make ML dataset")
 parser.add_argument('--num', type=int, nargs=1, default=0)
 parser.add_argument('--start', type=int, nargs=1, default=0)
+parser.add_argument('--output-base', type=str)
 parser.add_argument('fname', nargs='*')
 args = parser.parse_args()
 
 fname = args.fname[0]
 num = args.num
-start = args.start[0]
+start = args.start
 print("Make ML dataset for", fname, "with", num, "instructions, start from", start)
 
 nlines = 1
@@ -43,6 +44,7 @@ bad_lines = 0
 bad_content = 0
 
 all_feats = []
+idx = 0
 with open(fname) as f:
     for line in f:
         if nlines <= start:
@@ -77,11 +79,11 @@ with open(fname) as f:
             print("So far have %d" % nlines)
             x = np.array(all_feats)
             idx = int(nlines / iter_num) - 1
-            np.savez_compressed(fname + ".t" + str(idx), x=x)
+            np.savez_compressed(args.output_base + ".t" + str(idx), x=x)
             all_feats = []
         nlines = nlines + 1
 
 if all_feats:
     print("The last one has %d" % (nlines - 1))
     x = np.array(all_feats)
-    np.savez_compressed(fname + ".t" + str(idx), x=x)
+    np.savez_compressed(args.output_base + ".t" + str(idx), x=x)

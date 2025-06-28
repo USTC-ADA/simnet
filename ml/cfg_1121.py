@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import numpy as np
 
 input_start = 11

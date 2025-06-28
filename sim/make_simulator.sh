@@ -1,4 +1,4 @@
-cd build
-cmake -DCMAKE_PREFIX_PATH=$HOME/software/libtorch ..
-make
-cd ..
+#!/usr/bin/env bash
+
+cmake -B build
+cmake --build build --parallel $(nproc)

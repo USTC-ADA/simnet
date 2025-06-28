@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 context_length = 111
 inst_length = 50
 

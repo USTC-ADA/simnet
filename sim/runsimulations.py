@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from subprocess import Popen, PIPE
 
 import glob
@@ -8,6 +9,7 @@ tr_file_name = sys.argv[1]
 aux_file_name = sys.argv[2]
 models_dir = sys.argv[3]
 var_txt_file = sys.argv[4]
+output_file = sys.argv[5]
 
 files = glob.glob("%s/*.pt" % models_dir)
 
@@ -25,4 +27,4 @@ for fname in files:
     (output, err) = process.communicate()
     exit_code = process.wait()
     print(output.decode("utf-8"),end='')
-    with open("simoutput.txt","a") as f: f.write(output.decode("utf-8"))
+    with open(output_file,"a") as f: f.write(output.decode("utf-8"))

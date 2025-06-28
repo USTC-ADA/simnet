@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import numpy as np
 import sys
 import time
@@ -7,6 +8,7 @@ import argparse
 
 parser = argparse.ArgumentParser(description="Scale dataset stored as compress numpy files")
 parser.add_argument('fnames',nargs='*')
+parser.add_argument('--output', type=str)
 args = parser.parse_args()
 
 fnames = args.fnames
@@ -28,6 +30,6 @@ for fname in fnames:
     else:
         total_x = np.vstack((total_x,x))
 
-np.savez_compressed(os.path.join(os.path.dirname(sys.argv[1]), "totalall"), x=total_x)
+np.savez_compressed(args.output, x=total_x)
 
 print("Took %f to make files" % (time.time() - t1))

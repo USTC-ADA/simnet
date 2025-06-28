@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from __future__ import print_function
 import argparse
 import torch
@@ -112,12 +113,18 @@ def main():
                         help='Test a model')
     parser.add_argument('--save-model', action='store_true', default=False,
                         help='For Saving the current Model')
+    parser.add_argument('--data-name', type=str,
+                        help='Data name')
+    parser.add_argument('--stats-name', type=str,
+                        help='Stats name')
+    parser.add_argument('--save-path', type=str,
+                        help='Save path')
 
     args = parser.parse_args()
 
 
-    fname = "totalall.npz"
-    statsname = "statsall.npz"
+    fname = args.data_name
+    statsname = args.stats_name
     
     use_cuda = (not args.no_cuda) and torch.cuda.is_available()
     print("Batch sz is %d. Save? %s. Cuda? %s. Dev count: %d \nFname %s\n" % 
@@ -212,7 +219,7 @@ def main():
     model.to(device)
     
     if args.test:
-        all_model_names=list(glob.iglob("models/*.pt"))
+        all_model_names=list(glob.iglob(args.save_path + "/*.pt"))
         all_model_names.sort(key=os.path.getmtime)
         #print("Model names:" + "\n".join(all_model_names))
         for model_name in all_model_names:
@@ -265,9 +272,9 @@ def main():
                   print("Got improvement at {} (from {:.4f} to {:.4f}".format(epoch,best,t))
                   best , best_idx = (t,epoch)
                   if use_cuda:
-                      torch.save(model.module, "best.pt" )
+                      torch.save(model.module, args.save_path + "/best.pt" )
                   else:
-                      torch.save(model, "best.pt" )
+                      torch.save(model, args.save_path + "/best.pt" )
                     
         if epoch > best_idx + 3*multiplier : #e.g. best is at 100, we exit at 401
             print("Ending at {} as there's been no improvement in 300 epochs. Best was at {}".format(epoch,best_idx))
@@ -277,10 +284,10 @@ def main():
             print("Saving")
             if use_cuda:
                 torch.save(model.module,
-                           "models/%d.pt" % epoch)
+                           args.save_path + "/%d.pt" % epoch)
             else:
                 torch.save(model,
-                           "models/%d.pt" % epoch)
+                           args.save_path + "/%d.pt" % epoch)
 
         
 if __name__ == '__main__':

@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import sys
 import time
 import os
@@ -74,4 +75,4 @@ if args.save:
             data[:, inst_length*i:inst_length*(i+1)] /= np.sqrt(all_var)
 
         print("Saving...")
-        np.savez_compressed("%s.n" % fname, x=data)
+        np.savez_compressed(args.dirName + '/' + os.path.basename(fname) + ".n", x=data)
