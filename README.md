@@ -1,3 +1,5 @@
+# See [This](https://ustc-ada.feishu.cn/wiki/SRa2weu4xi8v5YkcV1KcQNQlnHd) for usage instruction.
+
 # SimNet
 
 SimNet is a machine learning (ML)-based computer architecture simulator that
